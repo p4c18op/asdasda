@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 
-class Product(models.Model):
+class New(models.Model):
     name = models.CharField(
         max_length=50,
         unique=True,
@@ -10,10 +10,10 @@ class Product(models.Model):
     quantity = models.IntegerField(
         validators=[MinValueValidator(0)],
     )
-    category = models.ForeignKey(
-        to='Category',
+    news = models.ForeignKey(
+        to='News',
         on_delete=models.CASCADE,
-        related_name='Products',
+        related_name='New',
     )
     price = models.FloatField(
         validators=[MinValueValidator(0.0)],
@@ -23,7 +23,7 @@ class Product(models.Model):
         return f'{self.name.title()}: {self.description[:20]}'
 
 
-class Category(models.Model):
+class News(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
